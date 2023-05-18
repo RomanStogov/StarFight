@@ -17,7 +17,7 @@ public class Asteroid extends SpaceObject{
         vy = MathUtils.random(-2f, -4);
         hp = 3;
         speedRotation = MathUtils.random(-2f, 2);
-        type = MathUtils.random(0, 1);
+        type = MathUtils.random(0, 2);
 
     }
 

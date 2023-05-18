@@ -19,8 +19,8 @@ public class ScreenGameKaladan implements Screen {
     MySF sf;
     Texture imgStars;
     Texture imgShip;
-    Texture imgEnemy;
-    Texture[] imgAsteroid = new Texture[2];
+    Texture[] imgEnemy = new Texture[2];
+    Texture[] imgAsteroid = new Texture[3];
     Texture imgShot;
     Texture imgBack;
     Texture imgAtlasFragment;
@@ -57,7 +57,10 @@ public class ScreenGameKaladan implements Screen {
         imgBackgrounds = new Texture("Stars3.png");
         imgStars = new Texture("Stars.png");
         imgShip = new Texture("ship1.png");
-        imgEnemy = new Texture("Enemy.png");
+
+        for (int i = 0; i < imgEnemy.length; i++) {
+            imgEnemy[i] = new Texture("Enemy"+i+".png");
+        }
 
         for (int i = 0; i < imgAsteroid.length; i++) {
             imgAsteroid[i] = new Texture("Asteroid"+i+".png");
@@ -244,7 +247,7 @@ public class ScreenGameKaladan implements Screen {
         for(Asteroid asteroid: asteroids)
             sf.batch.draw(imgAsteroid[asteroid.type], asteroid.getX(), asteroid.getY(), asteroid.width/2, asteroid.height/2,
                     asteroid.width, asteroid.height, 1, 1, asteroid.speedrotation, 1, 1, 420, 420, false, false);
-        for(Enemy enemy: enemies) sf.batch.draw(imgEnemy, enemy.getX(), enemy.getY(), enemy.width, enemy.height);
+        for(Enemy enemy: enemies) sf.batch.draw(imgEnemy[enemy.type], enemy.getX(), enemy.getY(), enemy.width, enemy.height);
 
         for(Shot shot: shots) sf.batch.draw(imgShot, shot.getX(), shot.getY(), shot.width, shot.height);
         if(ship.isVisible) sf.batch.draw(imgShip, ship.getX(), ship.getY(), ship.width, ship.height);
@@ -286,7 +289,10 @@ public class ScreenGameKaladan implements Screen {
     public void dispose() {
         imgStars.dispose();
         imgShip.dispose();
-        imgEnemy.dispose();
+
+        for (Texture texture : imgEnemy) {
+            texture.dispose();
+        }
         for (Texture texture : imgAsteroid) {
             texture.dispose();
         }
